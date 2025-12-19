@@ -200,9 +200,59 @@ function Features() {
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">
                       {getData?.product_name || "Product name not available"}
                     </h3>
-                    {/* <div className="text-3xl font-bold text-green-600 dark:text-green-400">
-                      {getData?.price  || "N/A"}
-                    </div> */}
+                    
+                    {/* {getData?.price && (
+                      <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-4">
+                        {getData.price}
+                      </div>
+                    )} */}
+
+                    {getData?.rating && (
+                      <div className="flex items-center justify-center gap-2 mb-6">
+                        <div className="flex items-center">
+                          {[...Array(5)].map((_, i) => {
+                            const fillPercentage = Math.max(0, Math.min(100, (getData.rating - i) * 100));
+                            return (
+                              <div key={i} className="relative w-5 h-5">
+                                <svg 
+                                  className="w-5 h-5 text-gray-300 absolute top-0 left-0" 
+                                  fill="currentColor" 
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                                <div style={{ width: `${fillPercentage}%` }} className="overflow-hidden absolute top-0 left-0 h-full">
+                                  <svg 
+                                    className="w-5 h-5 text-yellow-400" 
+                                    fill="currentColor" 
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                  </svg>
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <span className="text-lg font-bold text-gray-700 dark:text-gray-300 mt-1">{getData.rating}/5</span>
+                      </div>
+                    )}
+
+                    {getData?.key_features && getData.key_features.length > 0 && (
+                      <div className="text-left mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Key Features</h4>
+                        <ul className="space-y-2">
+                          {getData.key_features.map((feature, index) => (
+                            <li key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+                              <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -210,7 +260,7 @@ function Features() {
               {/* Analysis Cards */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Overall Opinion */}
-                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300">
+                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -227,7 +277,7 @@ function Features() {
                 {/* Pros and Cons */}
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Pros */}
-                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300">
+                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center shadow-lg">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -247,7 +297,7 @@ function Features() {
                   </div>
 
                   {/* Cons */}
-                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300">
+                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-rose-500 rounded-xl flex items-center justify-center shadow-lg">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -268,7 +318,7 @@ function Features() {
                 </div>
 
                 {/* Sentiment Analysis */}
-                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300">
+                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20 dark:border-gray-700/50 p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
