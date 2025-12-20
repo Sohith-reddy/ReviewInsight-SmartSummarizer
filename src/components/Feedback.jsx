@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 export default function Feedback() {
@@ -9,6 +10,7 @@ export default function Feedback() {
     message: ''
   });
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState({ type: 'success', title: '', message: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,22 +20,44 @@ export default function Feedback() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Feedback Submitted:', formData);
-    // Here you would typically send the formData to your backend server
-    setShowSnackbar(true);
-    setTimeout(() => {
-      setShowSnackbar(false);
-    }, 3000);
+    
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/feedback`, formData);
+      
+      setSnackbarMessage({
+        type: 'success',
+        title: 'Success!',
+        message: 'Thank you for your feedback!'
+      });
+      setShowSnackbar(true);
+      
+      setTimeout(() => {
+        setShowSnackbar(false);
+      }, 3000);
 
-    setFormData({
-      name: '',
-      email: '',
-      category: 'General',
-      rating: '5',
-      message: ''
-    });
+      setFormData({
+        name: '',
+        email: '',
+        category: 'General',
+        rating: '5',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      
+      setSnackbarMessage({
+        type: 'error',
+        title: 'Failed!',
+        message: 'Failed to send feedback. Please try again.'
+      });
+      setShowSnackbar(true);
+      
+      setTimeout(() => {
+        setShowSnackbar(false);
+      }, 3000);
+    }
   };
 
   return (
@@ -156,15 +180,27 @@ export default function Feedback() {
 
       {showSnackbar && (
         <div className="fixed bottom-5 right-5 z-50 animate-fade-in-up">
-          <div className="flex items-center gap-3 rounded-xl bg-green-600 px-6 py-4 text-white shadow-2xl shadow-green-500/20 backdrop-blur-md">
+          <div className={`flex items-center gap-3 rounded-xl px-6 py-4 text-white shadow-2xl backdrop-blur-md ${
+            snackbarMessage.type === 'success' 
+              ? 'bg-green-600 shadow-green-500/20' 
+              : 'bg-red-600 shadow-red-500/20'
+          }`}>
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20">
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
+              {snackbarMessage.type === 'success' ? (
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
             </div>
             <div>
-              <h4 className="font-bold text-sm">Success!</h4>
-              <p className="text-sm text-green-50">Thank you for your feedback!</p>
+              <h4 className="font-bold text-sm">{snackbarMessage.title}</h4>
+              <p className={`text-sm ${snackbarMessage.type === 'success' ? 'text-green-50' : 'text-red-50'}`}>
+                {snackbarMessage.message}
+              </p>
             </div>
           </div>
         </div>
