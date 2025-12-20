@@ -106,15 +106,13 @@ function Features() {
 
   return (
     <div className="relative min-h-screen w-full pt-24 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-slate-900 dark:to-gray-800 transition-all duration-500">
-      {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute top-1/2 -left-40 w-96 h-96 bg-gradient-to-br from-indigo-400/15 to-cyan-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="relative z-10">
-        {/* Hero Section */}
-        <div className="text-center py-20 px-4">
+        <div className="text-center pt-10 pb-16 px-4">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-indigo-900 dark:from-white dark:via-blue-200 dark:to-indigo-200 bg-clip-text text-transparent mb-6 animate-fade-in-up">
               Review Analyzer
@@ -376,8 +374,6 @@ function Features() {
             </div>
           </div>
         )}
-
-        {/* Empty State */}
         {!getData?.overall_opinion && !isLoading && (
           <div className="text-center py-20 animate-fade-in-up">
             <div className="max-w-md mx-auto">

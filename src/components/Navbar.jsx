@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const navigation = [
   { name: "Home", to: "/" },
   { name: "Review Analyzer", to: "/features" },
+  { name: "Feedback", to: "/feedback" },
 ];
 
 export default function Navbar({ theme = "light", toggleTheme }) {

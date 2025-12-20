@@ -58,6 +58,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Features from "./components/Features";
 import { useState, useEffect } from "react";
 import NotFound from "./components/NotFound";
+import Feedback from "./components/Feedback";
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -87,6 +88,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Example />} />
           <Route path="/features" element={<Features />} />
+          <Route path="/feedback" element={<Feedback />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
